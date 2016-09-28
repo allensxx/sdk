@@ -1,0 +1,68 @@
+
+.container_1{
+
+
+	margin-top:100px; 
+}
+
+
+.form-actions{
+	margin-top: 20px;
+	margin-bottom:50px; 
+}
+
+
+.bk{
+	background-color: yellow;
+}
+
+
+thead>tr th{
+	color:#538dc2;
+	background-color: #f2f3f4;
+}
+
+th{
+	text-align: center;
+}
+
+
+.bk_1{
+	background-color: blue;
+}
+
+
+.but_pos{
+	position: relative;
+	left:83.8%;
+	top:6px;
+}
+
+
+.but_pos_1{
+	position: relative;
+	left: 91%;
+	top:-6px;
+
+}
+
+
+.modal_pos{
+	position: fixed;
+	left: 20%;
+	top:100px;
+}
+
+
+.panel .dataTables_info {
+    padding: 17px 14px;
+}
+.dataTables_info {
+    padding: 20px 0 0;
+    display: block;
+    float: left;
+    font-size: 12px;
+}
+
+.datatable-footer {
+    background: #fff;

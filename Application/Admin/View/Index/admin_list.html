@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>秀逗军团数据后台</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+    <script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src='__PUBLIC__/admin/jquery/laydate/laydate/laydate.js'></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/index.css">
+    <script src='__PUBLIC__/admin/jquery/index.js'></script>
+
+    <style >
+        @media{
+            .container{
+                width:100%;
+            }
+        }
+        .laydate-icon{
+            height:34px;
+            width:180px;
+        }
+
+
+        .table > tbody > tr > td{
+            padding:10px 26px;
+        }
+        .table tr td,.table tr th{
+            border:1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h3><a href="{:U('admin/index/adduser')}">添加管理员</a></h3>
+    <div class="container">
+           <table class="table table-responsive">
+            <thead>
+               <tr>
+              <th>id</th>
+              <th>用户</th>
+              <th>渠道号</th>
+              <th>等级</th>
+              <th>操作</th>
+            </tr> 
+            </thead>
+            
+           <?php foreach ($list as $key => $value): ?>
+              <tr>
+                <td><?php echo $value['id'] ?></td>
+                <td><?php echo $value['username'] ?></td>
+                <td><?php echo get_channel($value['channel_id']) ?></td>
+                <td><?php echo $value['level'] ?></td>
+                <td><a  onClick="return confirm('确定删除?');"  href="{:U('admin/index/admin_del',array('id'=>$value[id]))}">删除</a></td>
+              </tr>
+
+            <?php endforeach ?>  
+             </table>
+      
+    </div>
+
+
+    
+</body>
+</html>

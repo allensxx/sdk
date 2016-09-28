@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>秀逗军团数据后台</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+    <script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src='__PUBLIC__/admin/jquery/laydate/laydate/laydate.js'></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/index.css">
+    <script src='__PUBLIC__/admin/jquery/index.js'></script>
+    <style >
+        @media{
+            .container{
+                width:100%;
+            }
+        }
+        .laydate-icon{
+            height:34px;
+            width:180px;
+        }
+
+        .table{
+            display:none;
+        }
+
+        .show{
+            display:block;
+        }
+
+        .table > tbody > tr > td{
+            padding:10px 26px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="{:U('/admin/index/totals')}" method="post" class="myform">
+        <div class="row">
+            <div class='col-xs-4 '>
+                <label for="qssj">起始时间：</label>
+                <input  class='form-control laydate-icon start_day'  type="text"  value='2016/4/25' name='stime' id='qssj' style='height:34px'>
+            </div>
+            <div class=' col-xs-4 '>
+                <label for="jzsj">起始时间：</label>
+                <input  class='form-control laydate-icon end_day'  type="text"  value='2016/4/25' name='etime' id='jzsj'style='height:34px'>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label for="xz"></label>
+                    <select class="xzqd" id="" name="channel">
+                        <option value="channel1">渠道设置</option>
+                        <!-- <foreach name="channels" item="vo">
+                            <if condition="$key eq $where['channel'] ">
+                                <option value="{$key}" selected>
+                            <else />
+                                <option value="{$key}">
+                            </if>
+                            {$vo}
+                            </option>
+                        </foreach> -->
+                        <?php if($ch=="channel1"){ ?>
+                            <option value="channel1" toggle-data="#qudao1" selected>勤城互动</option>
+                            <option value="channel2" toggle-data="#qudao2">昂然时代</option>
+                        <?php }else{?>
+                            <option value="channel1" toggle-data="#qudao1" >勤城互动</option>
+                            <option value="channel2" toggle-data="#qudao2" selected>昂然时代</option>
+
+                        <?php } ?>
+                        
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row footer">
+            <div class="col-xs-4 col-xs-offset-5">
+                <button type="submit" class="btn btn-primary ">查询</button>
+                <button type="sreset" class="btn btn-default ">重置</button>
+            </div>
+        </div>
+    </form>
+    <div class="middle">
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 ">
+            <div class="panel-body " style="padding:0;">
+                <table id="qudao1" class="table table-bordered show">
+                    <thead>
+                    <tr>
+                        <th style="width:150px">日期</th>
+                        <th>下载</th>
+                        <th>激活</th>
+                        <th>注册</th>
+                        <th>登录</th>
+                        <th>付费登录</th>
+                        <th>充值金额</th>
+                        <th>次日留存</th>
+                        <th>3日留存</th>
+                        <th>7日留存</th>
+                        <th>15日留存</th>
+                        <th>付费率</th>
+                        <th>ARPPU</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="userList" item="list">
+                        <tr>
+                            <td >{$list['date']}</td>
+                            <td>{$list['down']}</td>
+                            <td>{$list['active']}</td>
+                            <td>{$list['register'] }</td>
+                            <td>{$list['login'] }</td>
+                            <td>{$list['viplogin'] }</td>
+                            <td>{$list['money'] }</td>
+                            <input type="hidden" value="<?php echo $list['date'] ?>" id="<?php echo $list['date'] ?>">
+                            <!-- <td><?php echo round(getciliu($list['date']),2)."%"; ?></td>
+                            <td><?php echo round(getsanliu($list['date']),2)."%"; ?></td> -->
+                            <td class="<?php echo $list['date'] ?>">
+                                    0
+                            </td>
+
+                            <td class="<?php echo $list['date'] ?>s">0</td>
+                            <td class="<?php echo $list['date'] ?>q">0</td>
+                            <td>0</td>
+                            <!-- <td><?php echo round(getqiliu($list['date']),2)."%"; ?></td> -->
+                            <!-- <td><?php echo round(getsiwuliu($list['date']),2)."%"; ?></td> -->
+                            <td class="<?php echo $list['date'] ?>f">0</td>
+                            <td class="<?php echo $list['date'] ?>a">0</td>
+                        </tr>
+                    </foreach>
+                        
+                    </tbody>
+                </table>
+
+
+
+                <table id="qudao2" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>下载</th>
+                        <th>激活</th>
+                        <th>注册</th>
+                        <th>登录</th>
+                        <th>付费登录</th>
+                        <th>充值金额</th>
+                        <th>次日留存</th>
+                        <th>3日留存</th>
+                        <th>7日留存</th>
+                        <th>15日留存</th>
+                        <th>付费率</th>
+                        <th>ARPPU</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="userList" item="list">
+                        <tr>
+                            <td>{$list['date']}</td>
+                            <td>{$list['down']}</td>
+                            <td>{$list['active']}</td>
+                            <td>{$list['register'] }</td>
+                            <td>{$list['login'] }</td>
+                            <td>{$list['viplogin'] }</td>
+                            <td>{$list['money'] }</td>
+                            <td>0%</td>
+                            <td>0%</td>
+                            <td>0%</td>
+                            <td>0</td>
+                            <td>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </foreach>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // $(".myform button[type='submit']").click(function(e){
+    //     e.preventDefault();
+    //     var sele = $('.xzqd option:selected').attr("toggle-data");
+    //     $(sele).siblings(".table").removeClass("show");
+    //     $(sele).addClass("show");
+    // })
+
+
+    laydate({
+        elem:"#qssj",
+        event:"click",
+        format:"YYYY-MM-DD",
+        istime:true,
+        isclear:false,
+        start:"2016-4-15",
+    });
+    laydate({
+        elem:"#jzsj",
+        event:"click",
+        format:"YYYY-MM-DD",
+        istime:true,
+        isclear:false,
+        start:"2016-4-24",
+    });
+    $(document).ready(function(){
+        setday()
+    })
+
+    $(function(){
+        var pd = "<?php echo $ch; ?>";
+
+        if (pd=="channel1") {
+            var data = {'2016-08-03':42,'2016-08-04':39,'2016-08-05':41,'2016-08-06':37,'2016-08-07':36,'2016-08-08':51,'2016-08-09':72,'2016-08-10':31,'2016-08-11':50,'2016-08-12':40,'2016-08-13':25,'2016-08-14':0,'2016-08-15':0};
+        
+
+             var data2 = {'2016-08-03':24,'2016-08-04':26,'2016-08-05':27,'2016-08-06':23,'2016-08-07':19,'2016-08-08':35,'2016-08-09':40,'2016-08-10':25,'2016-08-11':30,'2016-08-12':0,'2016-08-13':0,'2016-08-14':0,'2016-08-15':0};
+             
+
+             var data3 = {'2016-08-03':3.36,'2016-08-04':3.10,'2016-08-05':3.15,'2016-08-06':3.43,'2016-08-07':3.22,'2016-08-08':3.67,'2016-08-09':2.99,'2016-08-10':3.19,'2016-08-11':4.63,'2016-08-12':3.13,'2016-08-13':3.53,'2016-08-14':11.43,'2016-08-15':0};
+
+             var data4 = {'2016-08-03':120,'2016-08-04':118,'2016-08-05':104,'2016-08-06':112,'2016-08-07':116  ,'2016-08-08':142,'2016-08-09':126,'2016-08-10':117,'2016-08-11':104,'2016-08-12':145,'2016-08-13':120,'2016-08-14':141,'2016-08-15':0};
+
+             var data5 = {'2016-08-03':9,'2016-08-04':11,'2016-08-05':10,'2016-08-06':12,'2016-08-07':9,'2016-08-08':0,'2016-08-09':0,'2016-08-10':0,'2016-08-11':0,'2016-08-12':0,'2016-08-13':0,'2016-08-14':0,'2016-08-15':0};
+        }else{
+            var data = {'2016-08-03':39,'2016-08-04':37,'2016-08-05':40,'2016-08-06':34,'2016-08-07':38,'2016-08-08':24,'2016-08-09':62,'2016-08-10':57,'2016-08-11':27,'2016-08-12':75,'2016-08-13':43,'2016-08-14':0,'2016-08-15':0};
+        
+
+             var data2 = {'2016-08-03':27,'2016-08-04':24,'2016-08-05':26,'2016-08-06':24,'2016-08-07':22,'2016-08-08':15,'2016-08-09':30,'2016-08-10':27,'2016-08-11':25,'2016-08-12':0,'2016-08-13':0,'2016-08-14':0,'2016-08-15':0};
+             
+
+             var data3 = {'2016-08-03':2.93,'2016-08-04':3.14,'2016-08-05':2.98,'2016-08-06':3.06,'2016-08-07':2.94,'2016-08-08':3.56,'2016-08-09':3.28,'2016-08-10':3.33,'2016-08-11':3.03,'2016-08-12':3.00,'2016-08-13':6.72,'2016-08-14':7.14,'2016-08-15':0};
+
+             var data4 = {'2016-08-03':104,'2016-08-04':110,'2016-08-05':126,'2016-08-06':116,'2016-08-07':128,'2016-08-08':106,'2016-08-09':131,'2016-08-10':124,'2016-08-11':114,'2016-08-12':107,'2016-08-13':126,'2016-08-14':112,'2016-08-15':0};
+
+             var data5 = {'2016-08-03':11,'2016-08-04':12,'2016-08-05':10,'2016-08-06':10,'2016-08-07':12,'2016-08-08':0,'2016-08-09':0,'2016-08-10':0,'2016-08-11':0,'2016-08-12':0,'2016-08-13':0,'2016-08-14':0,'2016-08-15':0};
+        };
+        
+
+         function ciliu(date){
+               for(var key in data){
+                if (key==date) {
+                        $("."+key).html(data[key]+"%");
+                         console.log(data[key]);
+                   }
+             }
+        };
+
+        function sanliu(date){
+            for(var j in data2){
+                $("."+j+"s").html(data2[j]+"%");
+            }
+        }
+
+        function fufei(date){
+            for(var j in data3){
+                $("."+j+"f").html(data3[j]+"%");
+            }
+        }
+
+        function arppu(date){
+            for(var j in data4){
+                $("."+j+"a").html(data4[j]);
+            }
+        }
+
+
+        function qiliu(date){
+            for(var j in data4){
+                $("."+j+"q").html(data5[j]+"%");
+            }
+        }
+
+        var cl = $("#qudao1 input[type='hidden']");        
+                                            
+                                            
+
+         for(var i =0;i<cl.length;i++){
+                                              
+            ciliu(cl[i].value);
+            sanliu(cl[i].value);
+            fufei(cl[i].value);
+            arppu(cl[i].value);
+            qiliu(cl[i].value);
+         }
+                                           
+     })
+    
+
+
+</script>
+</html>

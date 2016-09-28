@@ -1,0 +1,17 @@
+Array
+(
+    [id] => 45
+    [username] => cyfei00
+    [password] => 8786ee7ba1ecc24313e6e6e32a522e5a
+    [email] => 
+    [phone] => 0
+    [regtime] => 2016-06-12
+    [logintime] => 2016-06-27
+    [deviceid] => 
+    [channel] => 
+    [recover] => 
+    [freeze] => 0
+    [first_recharge] => 0
+    [money_top] => 0
+)
+-|-2016-09-14

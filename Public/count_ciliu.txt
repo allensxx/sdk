@@ -1,0 +1,1 @@
+UPDATE `sp_counts` SET `qiliu`=qiliu+1 WHERE `channel` = '123456' AND `date` = '2016-09-14'

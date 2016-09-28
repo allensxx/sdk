@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>秀逗军团数据后台</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+    <script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src='__PUBLIC__/admin/jquery/laydate/laydate/laydate.js'></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/index.css">
+    <script src='__PUBLIC__/admin/jquery/index.js'></script>
+
+    <style >
+        @media{
+            .container{
+                width:100%;
+            }
+        }
+        .laydate-icon{
+            height:34px;
+            width:180px;
+        }
+
+        .table{
+            display:none;
+        }
+
+        .show{
+            display:block;
+        }
+
+        .table > tbody > tr > td{
+            padding:10px 26px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="{:U('admin/index/adduser')}" method="post" class="myform" name="userform" onsubmit="return reg2()">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">用户级别</label>
+              <div class="col-sm-6">
+                <select name="level" id="" class="form-control">
+                   <option value="1">一级</option>
+                   <option value="2">二级</option>
+                </select>
+              </div>
+           </div>
+           <br>
+           <div class="form-group">
+            <label class="col-sm-3 control-label">渠道</label>
+            <div class="col-sm-6">
+              <select name="users" id="" class="form-control">
+                 <?php foreach ($channel as $key => $value) { ?>
+                 
+                  <option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
+                  <?php } ?>
+              </select>
+            </div>
+          </div>
+          <br>
+        <form action="" method="post" class="myform">
+           <div class="form-group">
+            <label class="col-sm-3 control-label">用户名</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="username" name="username">
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="inputPassword" class="col-sm-3 control-label">密码</label>
+            <div class="col-sm-6">
+              <input type="password" class="form-control" id="inputPassword" name="psd" placeholder="Password">
+            </div>
+          </div>
+          <br>
+           <div class="form-group">
+            <label for="inputPassword2" class="col-sm-3 control-label">重复密码</label>
+            <div class="col-sm-6">
+              <input type="password" class="form-control" id="inputPassword2" name="psd" placeholder="Password">
+            </div>
+          </div>
+            <br>
+           <div class="row footer">
+                <div class="col-xs-4 col-xs-offset-5">
+                    <button  type="submit" class="btn btn-primary ">添加</button>
+                    <button type="sreset" class="btn btn-default ">重置</button>
+                </div>
+            </div>
+
+        </form>
+        
+      
+    </div>
+
+<script>
+
+    // $(".myform button[type='submit']").click(function(e){
+    //     e.preventDefault();
+    //     var sele = $('.xzqd option:selected').attr("toggle-data");
+    //     $(sele).siblings(".table").removeClass("show");
+    //     $(sele).addClass("show");
+    // })
+
+
+
+    function reg2(){
+        var psd1=$('#inputPassword').val();
+        var psd2=$("#inputPassword2").val();
+        if(psd1=='' || psd2==''){
+            alert('密码不能为空！');
+             return false;
+        }else if( psd1.length<6 ||psd2.length<6){
+            
+            alert('密码长度不能小于6!');
+          return false;
+        }else if(psd1 !=psd2){
+           
+            alert('两次密码输入不一致！')
+            return false;
+        }else{
+            console.log('1');
+        }
+    }
+
+
+
+</script>
+
+    
+</body>
+</html>

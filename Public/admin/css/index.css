@@ -1,0 +1,85 @@
+.header{
+	width:100%;
+	height:50px;
+	background-color: #5093c4;
+}
+.logo_icon{
+	padding:5px 0;
+}
+.nav li{
+	float:left;
+}
+
+.nav>li>a{
+	color:#fff;
+	font-weight:900;
+	padding:15px 20px;
+	border-left:1px solid #63afeb;
+}
+
+.nav>li:last-child>a{
+	border-right:1px solid #63afeb;
+}
+.nav>li>a:hover{
+	color:#333;
+}
+.active{
+	background-color:#eee;
+	
+}
+li.active>a{
+	color:#333;
+}
+.myform{
+	padding-top:50px;
+}
+.myform .footer{
+	padding-top:20px;
+}
+.myform .xzqd{
+	margin-top:25px;
+	width:200px;
+	height:34px;
+	border-radius: 5px;
+}
+.middle{
+	height:50px;
+}
+.table>thead>tr>th{
+	color: #538dc2;
+    background-color: #f2f3f4;
+}
+.table>tbody>tr:hover{
+	background-color: #d8d8d8;
+}
+.footer-page{
+	color:#333;
+}
+.footer-left{
+	padding-left:90px;
+	float:left;
+}
+.footer-right{
+	float:right;
+	padding-right:90px;
+}
+.footer-right a{
+	color:#333;
+}
+.footer-right a:hover{
+	text-decoration: none;
+}
+.footer-right a.next{
+	color:red;
+}
+
+.table-bordered{
+	max-width: 100%;
+    width: 100%;
+}
+.table-bordered>tbody>tr>td{
+	/*padding:1em;*/
+}
+.allpage{
+	float:right;
+}

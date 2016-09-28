@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>排名</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+  	<script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+  	<script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.js"></script>
+  	<script src="../js/respond.min.js"></script>
+    <![endif]-->
+    <script src='__PUBLIC__/admin/jquery/laydate/laydate/laydate.js'></script>
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/list.css">
+     <script src='__PUBLIC__/admin/jquery/index.js'></script>
+</head>
+<body>
+<div class='container container_1'>
+	
+<form action="" role='form'>
+
+	<div class='row'>
+		<div class='col-xs-4 '>
+			<label for="demo1">起始时间：</label>
+			<input  class='form-control laydate-icon start_day'  type="text"  value='2016/4/25' name='startname' id='demo1' style='height:34px'>
+		</div>
+		<div class=' col-xs-4 '>
+			<label for="demo2">起始时间：</label>
+			<input  class='form-control laydate-icon end_day'  type="text"  value='2016/4/25' name='endname' id='demo2'style='height:34px'>
+		</div>
+		<div class='col-xs-4 '>
+			<div class='form-group'>
+			 <label for="name">选择列表</label>
+		      <select class="form-control">
+		         <option>选择渠道</option>
+		         <option>创游1</option>
+		         <option>创游2</option>
+		         <option>创游3</option>
+		      </select>
+		    </div>
+			
+		</div>
+	</div>
+
+	<div class='form-actions text-center'>
+		<input type="submit" class='btn btn-primary btn-sm' value='查询' >
+		<input type="reset" class='btn btn-default  btn-sm ' Value='重置' id='reset' >
+	</div>
+
+</form>
+<div class='row'>
+	<div class='col-sm-12'>
+		<div class='panel panel-default'>
+			<div class='panel-heading'>
+				 <p class="panel-title">排名</p>
+            </div>
+
+			<div class='panel-body table-responsive' style='padding:0'>
+				<table class='table table-hover table-bordered text-center'style='border: 1px solid #ddd'>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>时间</th>
+							<th>账号</th>
+							<th>金额</th>
+							<th>相关操作</th>
+						</tr>
+					</thead>
+				<tbody>
+				<?php $i=0; foreach ($orderlist as $key => $value): $i++?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $value['pay_date']; ?></td>
+                        <td><?php echo $value['username']; ?></td>
+                        <td><?php echo $value['amount']; ?></td>
+                        <td>删除</td>
+                    </tr>
+                  <?php endforeach;?>
+				</tbody>
+				</table>
+			</div>
+
+			<div class="datatable-footer" >
+
+	          	<div class='dataTables_info' id='dataTables_info' >当前第1页, 共6页</div>
+	          	<div class='dataTables_info' id='dataTables_info' style='float:right'>【首页】【上一页】<span style='color:red'>【下一页】</span>【尾页】
+	          	</div>
+	        </div> 
+		</div>
+	</div>
+</div>
+</div>
+
+
+<!-- Large modal -->
+
+<div class="modal fade bs-example-modal-lg " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
+  	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	    	<div class='modal-body'>
+			 
+				<div class='panel panel-default'>
+					<div class='panel-heading bk_1'>
+						 <p class="panel-title"> <span class='glyphicon glyphicon-star-empty'></span>详情</p>
+						
+		            </div>
+		            <button type='button'  class="btn btn-primary but_pos" >导出为excel格式</button>
+
+					<div class='panel-body table-responsive' style='padding:0；clear:both'>
+						<table class='table table-hover table-bordered text-center' style='border: 1px solid #ddd'>
+							<thead>
+								<tr>
+									<th>用户ID</th>
+									<th>首次充值</th>
+									<th>金额</th>
+									<th>充值时间</th>
+									<th>订单号</th>
+									<th>充值方式</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<th>1</th>
+									<th>1623442</th>
+									<th>1122233</th>
+									<th>1</th>
+									<th>1623442</th>
+									<th>1122233</th>
+								</tr>
+							</tbody>
+
+								<tbody>
+								<tr>
+									<th>1</th>
+									<th>1623442</th>
+									<th>1122233</th>
+									<th>1</th>
+									<th>1623442</th>
+									<th>1122233</th>
+								</tr>
+							</tbody>
+
+							<tbody>
+								<tr>
+									<th>1</th>
+									<th>1623442</th>
+									<th>1122233</th>
+								    <th>1</th>
+									<th>1623442</th>
+									<th>1122233</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        	</div>
+		</div>
+	</div>
+</div>
+<!-- Large modal -->
+
+
+
+
+</body>
+
+<script>
+	
+  laydate({
+      elem:"#demo1",
+      event:"click",
+      format:"YYYY-MM-DD ",
+      istime:true,
+      isclear:false,
+      start:"2016-4-15"
+    });
+ laydate({
+      elem:"#demo2",
+      event:"click",
+      format:"YYYY-MM-DD ",
+      istime:true,
+      isclear:false,
+      start:"2016-4-15"
+    });
+
+$(document).ready(function(){
+ setday();
+ $('#close').click(function(){
+ 	$('.modal').hide();
+ })
+})
+  
+
+</script>
+</html>

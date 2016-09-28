@@ -1,0 +1,1 @@
+INSERT INTO `sp_user` (`username`,`password`,`channel`,`recover`,`regTime`) VALUES ('57d90deac39da','e10adc3949ba59abbe56e057f20f883e','chuangyou1','57d90deac3a22','2016-09-14')

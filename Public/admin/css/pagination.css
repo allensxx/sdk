@@ -1,0 +1,86 @@
+.pages {
+  margin:30px 0 0 260px;
+  font-size: 14px;
+  overflow: hidden;
+}
+.pages #Pagination {
+  float: left;
+  overflow: hidden;
+}
+.pages #Pagination .pagination {
+  text-align: right;
+  overflow: hidden;
+}
+.pages #Pagination .pagination a,
+.pages #Pagination .pagination span {
+  float: left;
+  display: inline;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 26px;
+  color: #666666;
+  margin-right: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  border:1px solid #eee;
+  border-radius:3px;
+}
+.pages #Pagination .pagination .current {
+  background: #EC1510;
+  color: #fff;
+}
+.pages #Pagination .pagination .prev,
+.pages #Pagination .pagination .next {
+  float: left;
+  width: 60px;
+  height: 26px;
+  background: #ffffff;
+  cursor: pointer;
+  color:#000;
+  background: url(../images/prev_next.png) no-repeat;
+}
+
+.pages #Pagination .pagination .prev {
+  background-position:  7px 5px;
+  *background-position:  7px 5px;
+}
+.pages #Pagination .pagination .next {
+  background-position: -48px 5px ;
+  *background-position: -48px 5px;
+}
+.pages #Pagination .pagination .pagination-break {
+  border: none;
+  background: none;
+  cursor: default;
+}
+.pages .searchPage {
+  float: left;
+  line-height: 16px;
+}
+.pages .searchPage .page-sum {
+  padding: 11px 13px;
+  color: #999999;
+}
+.pages .searchPage .page-go input {
+  width: 30px;
+  height: 26px;
+  margin: 0 5px;
+  padding-left: 5px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  line-height: 26px;
+}
+.pages .searchPage .page-btn {
+  margin: 9px 0 5px 5px;
+  padding: 2px 5px;
+  border-radius: 2px;
+  color: #333333;
+  text-decoration: none;
+}
+.pages .page_all{
+  float: left;
+  line-height: 16px;
+  display: none;
+}
+.pages .page_all p{float: left;color: #999999;margin-right: 8px;}

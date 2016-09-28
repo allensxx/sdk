@@ -1,0 +1,1 @@
+UPDATE `sp_counts` SET `login`=login+1 WHERE `date` = '2016-09-21' AND `channel` = '123456'

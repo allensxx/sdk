@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>秀逗军团数据后台</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+    <script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src='__PUBLIC__/admin/jquery/laydate/laydate/laydate.js'></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/index.css">
+    <script src='__PUBLIC__/admin/jquery/index.js'></script>
+    <style >
+        @media{
+            .container{
+                width:100%;
+            }
+        }
+        .laydate-icon{
+            height:34px;
+            width:180px;
+        }
+
+        .table{
+            display:none;
+        }
+
+        .show{
+            display:block;
+        }
+        .table > tbody > tr{
+            width:100%;
+        }
+
+        .table > tbody > tr > td{
+          
+            padding:10px 17px;
+              border:1px solid #ddd;
+        }
+       .table tr td:nth-child(1){
+            width:20%;        
+       }
+       .table tr td:nth-child(2){
+            width:7%;        
+       }
+       .table tr td:nth-child(3){
+            width:18%;        
+       }
+       .table tr td:nth-child(4){
+            width:20%;        
+       }
+       .table tr td:nth-child(5){
+            width:7%;        
+       }
+       .table tr td:nth-child(6){
+            width:11%;        
+       }
+       .table tr td:nth-child(7){
+            width:17%; 
+       }
+
+       /**/
+       
+        #pageBox { padding: 10px 0 0 0; }
+        #pageBox span {
+            display: inline-block;
+            width: 60px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            color: #fff;
+            background:#5093C4;
+        }
+        #pageNav { display: inline-block; }
+        #pageNav a {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            color: #5093C4;
+            text-decoration:none;
+        }
+        #pageNav a.active,
+        #pageNav a:hover {
+            background: #5093C4;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="{:U('/admin/index/query_order')}" method="post" class="myform">
+    <input type="hidden" name="isdown" value="0" id="mydown">
+        <div class="row">
+            <div class='col-xs-3 '>
+                <label for="qssj">下单时间</label>
+                <input  class='form-control laydate-icon start_day'  type="text" value=""  name='stime' id='qssj' style='height:34px'>
+            </div>
+            <div class=' col-xs-3 '>
+                <label for="order">订单号</label>
+                <input  class='form-control'  type="text"  value='' name='order' placeholder="订单号" id='order'style='height:34px'>
+            </div>
+            <div class=' col-xs-3 '>
+                <label for="userid">用户ID</label>
+                <input  class='form-control '  type="text"  placeholder="用户ID" name='userid' id='userid'style='height:34px'>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label for="xz"></label>
+                     <?php if($_SESSION['is_root']==1) {?>
+                        <select class="xzqd" id="" name="channel">
+                            <option value="" >选择渠道</option>
+                            <!-- <foreach name="channels" item="vo">
+                                <if condition="$key eq $where['channel'] ">
+                                    <option value="{$key}" selected>
+                                <else />
+                                    <option value="{$key}">
+                                </if>
+                                {$vo}
+                                </option>
+                            </foreach> -->
+                            <foreach name="channel_list" item="channl">
+                                <option value="<?php echo $channl['bundelid'] ?>">{$channl['name']}</option>
+                             </foreach>   
+                            
+                        </select>
+                        <?php } ?> 
+                </div>
+            </div>
+        </div>
+        <div class="row footer">
+            <div class="col-xs-4 col-xs-offset-5">
+                <button type="submit" class="btn btn-primary ">查询</button>
+                <button type="sreset" class="btn btn-default ">重置</button>
+                <button class="btn btn-success" >导出表格</button>
+            </div>
+        </div>
+    </form>
+    <div class="middle">
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 ">
+            <div class="panel-body " style="padding:0;">
+                <table id="qudao1" class="table show">
+                    <thead>
+                    <tr>
+                        <th >下订单时间</th>
+                        <th>用户ID</th>
+                        <th >订单号</th>
+                        <th >名称</th>
+                        <th >金额</th>
+                        <th >状态</th>
+                        <th>支付时间</th>
+
+                        
+                    </tr>
+                    </thead>
+                    <tbody id="pageMain">
+                     
+                    <foreach name="list" item="query_list">
+                        <tr>
+                            <td  >
+                               <?php echo date("Y-m-d H:i:s",$query_list['ordertime']); ?>
+                             </td>
+                            <td>{$query_list['uid']}</td>
+                            <td >{$query_list['orderh']}</td>
+                            <td >{$query_list['tradename'] }</td>
+                            <td>{$query_list['amount'] }</td>
+                            
+                            <?php if ($query_list['state']==1){ ?>
+                                <td>已支付</td>
+                            <?php }else{ ?>
+                                <td>未支付</td>
+                                <?php } ?>
+                            <td>{$query_list.pay_time}</td>
+                            
+                        </tr>
+                    </foreach>
+                        
+                    </tbody>
+                </table>
+
+
+
+                
+            </div>
+        </div>
+    </div>
+    <div id="pageBox">
+        <span id="prev">&laquo; 上一页</span>
+        <ul id="pageNav">
+        </ul>
+        <span id="next">&raquo; 下一页</span>
+    </div>
+</div>
+
+<script>
+
+$('.btn-success').click(function(){
+
+	 $('#mydown').val(1);
+	 
+});
+
+    // $(".myform button[type='submit']").click(function(e){
+    //     e.preventDefault();
+    //     var sele = $('.xzqd option:selected').attr("toggle-data");
+    //     $(sele).siblings(".table").removeClass("show");
+    //     $(sele).addClass("show");
+    // })
+
+   
+    laydate({
+        elem:"#qssj",
+        event:"click",
+        format:"YYYY-MM-DD",
+        istime:true,
+        isclear:false,
+        start:"",
+    });
+    
+    // $(document).ready(function(){
+    //     setday()
+    // })
+</script>
+<script>
+     window.onload = function(){
+
+        tabPage({
+            pageMain : 'pageMain',
+            pageNav : 'pageNav',
+            pagePrev: 'prev',
+            pageNext: 'next',
+            curNum: 10,      //每页显示的条数
+            activeClass: 'active',   //高光显示的class
+            ini: 0    //初始化显示的页面
+        });
+
+        function tabPage(tabPage){
+            var pageMain = document.getElementById(tabPage.pageMain);   //获取内容列表
+            var pageNav = document.getElementById(tabPage.pageNav);     //获取分页
+            var pagePrev = document.getElementById(tabPage.pagePrev);   //上一页
+            var pageNext = document.getElementById(tabPage.pageNext);   //下一页
+
+            var curNum = tabPage.curNum;                                //每页显示数
+            var len = Math.ceil(pageMain.children.length / curNum);console.log(len) ;     //计算总页数
+            var pageList = '';                                          //生成页码
+            var iNum = 0;                                               //当前的索引值index
+
+            for(var i = 0; i < len; i++){
+                pageList+='<a href="javascript:;">'+ ( i + 1)+'</a>';
+            }
+            pageNav.innerHTML = pageList;
+
+            pageNav.children[0].className = tabPage.activeClass;        //头一页加高亮显示
+
+            for(var i = 0; i < pageNav.children.length; i++){
+                pageNav.children[i].index = i;
+                pageNav.children[i].onclick = function(){
+                    for(var t = 0; t < pageNav.children.length; t++){
+                        pageNav.children[t].className = '';
+                    }
+                    this.className = tabPage.activeClass;
+                    iNum = this.index;
+                    ini(iNum);
+                };
+            }
+
+
+            //下一页
+            pageNext.onclick = function(){
+                if(iNum == len - 1){
+                    return false;
+                }else{
+                    for(var t = 0; t < pageNav.children.length; t++){
+                        pageNav.children[t].className = '';
+                    }
+                    iNum++;
+                    pageNav.children[iNum].className = tabPage.activeClass;
+                    ini(iNum);
+                }
+            };
+
+            //上一页
+            pagePrev.onclick = function(){
+                if(iNum == 0){
+                    alert('当前是第一页');
+                    return false;
+                }else{
+                    for(var t = 0; t < pageNav.children.length; t++){
+                        pageNav.children[t].className = '';
+                    }
+                    iNum--;
+                    pageNav.children[iNum].className = tabPage.activeClass;
+                    ini(iNum);
+                }
+            };
+
+            function ini(iNum){
+                for(var i = 0; i < pageMain.children.length; i++){
+                    pageMain.children[i].style.display = 'none';
+                }
+
+                for(var i = 0; i < curNum; i++){
+                    if(pageMain.children[(iNum * curNum + i)] == undefined){ continue; }
+                    pageMain.children[(iNum * curNum + i)].style.display = 'table-row';
+                }
+            }
+
+            ini(iNum);
+
+        }
+    };
+
+</script>
+    
+</body>
+</html>

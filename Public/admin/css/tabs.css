@@ -1,0 +1,49 @@
+.table tr td:nth-child(1){
+            width:20%;        
+       }
+       .table tr td:nth-child(2){
+            width:7%;        
+       }
+       .table tr td:nth-child(3){
+            width:18%;        
+       }
+       .table tr td:nth-child(4){
+            width:20%;        
+       }
+       .table tr td:nth-child(5){
+            width:7%;        
+       }
+       .table tr td:nth-child(6){
+            width:11%;        
+       }
+       .table tr td:nth-child(7){
+            width:17%; 
+       }
+
+       /**/
+       
+        #pageBox { padding: 10px 0 0 0; }
+        #pageBox span {
+            display: inline-block;
+            width: 60px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            color: #fff;
+            background:#5093C4;
+        }
+        #pageNav { display: inline-block; }
+        #pageNav a {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            color: #5093C4;
+            text-decoration:none;
+        }
+        #pageNav a.active,
+        #pageNav a:hover {
+            background: #5093C4;
+            color: #fff;
+        }

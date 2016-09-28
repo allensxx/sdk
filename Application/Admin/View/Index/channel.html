@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>秀逗军团数据后台</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+	<link rel="stylesheet" href="__PUBLIC__/admin/webuploader/webuploader.css">
+	<script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+	<link rel="stylesheet" href="__PUBLIC__/admin/css/page.css">
+	<script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script type='text/javascript' charset='utf-8' src='__PUBLIC__/admin/editor-php/ueditor.config.js'></script>
+	<script type='text/javascript' charset='utf-8' src='__PUBLIC__/admin/editor-php/ueditor.all.min.js'></script>
+
+	<script type='text/javascript' charset='utf-8' src='__PUBLIC__/admin/editor-php/lang/zh-cn/zh-cn.js'></script>
+	<link rel="stylesheet" href="__PUBLIC__/admin/css/fileinput.min.css">
+	<script src='__PUBLIC__/admin/jquery/fileinput.min.js'></script>
+	<!-- <script src='__PUBLIC/admin/jquery/fileinput_locale_zh.js'></script> 中文-->
+	<link rel="stylesheet" href="__PUBLIC__/admin/css/conf.css">
+	<style >
+		@media{
+			.container{
+				width:100%;
+			}
+		}
+		.addApp{
+			font-size:18px;display:block;width:120px;height:45px;text-align:center;line-height:45px;background-color:#5093c4;border-radius:5px;color:#fff;
+		}
+		.container-box .btn{
+			margin-top:30px;text-align:center;height:30px;width:100%;display: block;
+		}
+		.container-box .btn input{
+			background-color:#5093c4;color:#fff;height:30px;width:100px;
+		}
+	</style>
+</head>
+<body>
+<div class="container container-box">
+	<ul class="menu nav nav-tabs ">
+		<li class="active"><a href="#list" data-toggle="container">渠道列表</a></li>
+		<li><a href="#add" data-toggle="container">添加渠道</a></li>
+	</ul>
+	<div class="show" id="list">
+		<div class="ssk">
+			<form action="{:U('/admin/Index/channel')}" method="post">
+				<input type="text" name="name" value="<?php echo $name;?>" placeholder="请输入渠道名称">
+				<!--<select class="all">
+					<option value="1">渠道设置</option>
+					<option value="1">勤城互动</option>
+					<option value="1">昂然时代</option>
+				</select>-->
+				<button class="btn btn-primary">搜索</button>
+			</form>
+		</div>
+
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>序号</th>
+				<th>渠道id</th>
+				<th>渠道名称</th>
+				<th>操作</th>
+				<!-- <th>操作</th>	 -->
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach($list as $k=>$v):?>
+			<tr>
+				<td><?php echo $v['id'];?></td>
+				<td><?php echo $v['bundelid'];?></td>
+				<td><?php echo $v['name'];?></td>
+				<td><a onClick="return confirm('确定删除?');"  href="{:U('admin/Index/del_channel',array('id'=>$v['id']))}">删除</a></td>
+			</tr>
+			<?php endforeach;?>
+
+			</tbody>
+		</table>
+		<div class="pagelist">{$page}</div>
+		<!-- <a href="" class="addApp">新增渠道</a> -->
+	</div>
+	<div class="hidden add" id="add">
+		<div class='panel-body ' style='padding:0'>
+			<form action="{:U('/admin/Index/insert_channel')}" method="post" enctype="multipart/form-data">
+				<table class='table  table-bordered ' style='margin-bottom: 0px;'>
+					<tbody>
+					<tr>
+						<td style='width:14%'>渠道id</td>
+						<td>
+							<input type="text" name="bundelid" placeholder='渠道id' style='width:50%;position:relative;left:-25%;line-height:30px'>
+						</td>
+					</tr>
+					<tr>
+						<td style='width:14%'>渠道名称</td>
+						<td>
+							<input type="text" name="name" placeholder='渠道名称' style='width:50%;position:relative;left:-25%;line-height:30px'>
+
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="btn">
+					<input type="reset" value="清除重填" class="reset" >
+					<input type="submit" value="确认提交" class="submit">
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+<script>
+	// 	 var ue = UE.getEditor('editor');
+
+	// 	  $("#file").fileinput({
+	// 	        uploadUrl: '#', // you must set a valid URL here else you will get an error
+	// 	        allowedFileExtensions : ['jpg', 'png','gif'],
+	// 	        overwriteInitial: false,
+	// 	        maxFileSize: 5000,
+	// 	        maxFilesNum: 10,
+	// 	        showUpload:false,
+	// 	        maxFileCount:10,
+	// 	        //allowedFileTypes: ['image', 'video', 'flash'],
+	// 	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+	// 	        initialPreviewCount:3,
+	// 	         browseClass: "btn btn-primary", 
+	// 	        msgFilesTooMany: "选择上传的文件数量({1}) 超过允许的最大数值{10}！",
+	// 	        slugCallback: function(filename) {
+	// 	        return filename.replace('(', '_').replace(']', '_');
+	// 	        }
+	// 	 });
+</script>
+<script>
+	$(function(){
+		if(!+[1,]){
+			$(".all").css({"position":"relative","top":"10"});
+		}
+
+	})
+	$('[data-toggle="container"]').click(function(e){
+		if(e && e.preventDefault) {
+			//阻止默认浏览器动作(W3C)
+			e.preventDefault();
+		} else {
+			//IE中阻止函数器默认动作的方式
+
+			window.event.returnValue = false;
+
+		}
+
+		$('.menu li').removeClass('active');
+		$(this).parent('li').addClass('active');
+
+		$('.show').addClass('hidden').removeClass('show');
+		var href = $(this).attr('href');
+		$(href).removeClass('hidden').addClass('show');
+	});
+</script>
+</body>
+</html>

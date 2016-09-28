@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>秀逗军团数据后台</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/page.css">
+    <script  src='__PUBLIC__/admin/jquery/jquery.js'></script>
+    <script src='__PUBLIC__/admin/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/js/bootstrap.js'></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <script src='__PUBLIC__/admin/jquery/laydate/laydate/laydate.js'></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/admin/css/index.css">
+    <script src='__PUBLIC__/admin/jquery/index.js'></script>
+    <style >
+        @media{
+            .container{
+                width:100%;
+            }
+        }
+        .laydate-icon{
+            height:34px;
+            width:180px;
+        }
+
+        .table{
+            display:none;
+            width:100%;
+        }
+
+        table{
+            width:100%;
+        }
+
+        th{
+            border:1px solid #ddd;
+        }
+
+        .show{
+            display:block;
+        }
+
+        .table > tbody > tr > td{
+            padding:10px 26px;
+            border:1px solid #ddd;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="{:U('/admin/index/first_pay')}" method="post" class="myform">
+        <div class="row">
+            <div class='col-xs-3 '>
+                <label for="qssj">起始时间：</label>
+                <input  class='form-control laydate-icon start_day'  type="text"  value='2016/4/25' name='stime' id='qssj' style='height:34px'>
+            </div>
+            <div class=' col-xs-3 '>
+                <label for="jzsj">起始时间：</label>
+                <input  class='form-control laydate-icon end_day'  type="text"  value='2016/4/25' name='etime' id='jzsj'style='height:34px'>
+            </div>
+
+
+             <div class='col-xs-3 '>
+                <label for="fpay">首充金额</label>
+                <input  class='form-control'  type="text"  value='' name='fpay' id='fpay'>
+            </div>
+             <div class="col-xs-3">
+                <div class="form-group">
+                    <label for="xz"></label>
+                        <?php if($_SESSION['is_root']==1) {?>  
+                            <select class="xzqd" id="" name="channel">
+                                <option value="">选择渠道</option>
+                                <!-- <foreach name="channels" item="vo">
+                                    <if condition="$key eq $where['channel'] ">
+                                        <option value="{$key}" selected>
+                                    <else />
+                                        <option value="{$key}">
+                                    </if>
+                                    {$vo}
+                                    </option>
+                                </foreach> -->
+
+                               <foreach name="channel_list" item="list">
+                                <option value="<?php echo $list['bundelid'] ?>">{$list['name']}</option>
+                             </foreach>   
+                                
+                            </select>
+                        <?php  } ?>    
+                </div>
+            </div>
+        </div>
+        <div class="row footer">
+            <div class="col-xs-4 col-xs-offset-5">
+                <button type="submit" class="btn btn-primary ">查询</button>
+                <button type="sreset" class="btn btn-default ">重置</button>
+            </div>
+        </div>
+    </form>
+    <div class="middle">
+
+    </div>
+    <div class="table-responsive">
+        <table id="qudao1" class="table show">
+            <thead >
+                <tr>
+                    <th style="width:400px">注册时间</th>
+                    <th style="width:400px">用户名</th>
+                    <th style="width:120px">首次充值金额</th>
+                    <th>渠道</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php foreach ($result as $key => $value) { ?>
+             <tr>
+                    <td ><?php echo isset($value['regtime'])?date("Y-m-d H:i:s",$value['regtime']):'-'; ?></td>
+                    <td><?php echo $value['username'] ?></td>
+                    <td><?php echo $value['amount'] ?></td>
+                    <td><?php echo $value['order_channel'] ?></td>
+                     <input type="hidden" value="<?php echo $list['date'] ?>" id="<?php echo $list['date'] ?>">
+                    
+            </tr>
+            <?php } ?>
+            </foreach>
+            </tbody>
+        </table>
+     </div>
+    <div class="pagelist">{$page}</div>
+
+</div>
+
+ <script>
+   
+ </script>
+<script>
+$(".pagination li").click(function(){
+        $(".pagination li").removeClass("active");
+        $(this).addClass('active');
+    })
+      var page=1;
+    $(".pagination li>a").click(function(){
+      
+
+        var counts= <?php echo ceil($countpage/10) ?>;
+        var classname=$(this).attr('class');
+        if(classname=="Previous"){
+            if(page>1){
+                page--;
+            }
+        }else if(classname=="Next"){
+            if(page<counts){
+                page++
+            }            
+        }else{
+            page++;
+            if(page>counts){
+                page=1;
+            }
+        }
+        console.log(page);
+        
+        $.ajax({
+         type: "GET",
+         url: "{:U('admin/index/first_pay')}",
+         data: "num="+page, 
+         success: function(msg){
+            if(msg!=null){
+                var counts=Math.ceil(msg.countpage/10); //获取总页数
+                var data=msg.list;
+                var str="";
+                // $('#qudao1 tbody').val()=str;
+                for(var i=0 ;i<data.length;i++){
+                    str+="<tr><td>"+data[i].pay_time+"</td>";
+                    str+="<td>"+data[i].username+"</td>";
+                    str+="<td>"+data[i].first_recharge+"</td>";
+                    if(data[i].channel==null||data[i].channel==""){
+                        str+="<td>--</td></tr>";
+                    }
+                    else{
+                        str+="<td>"+data[i].channel+"</td></tr>";
+                    }
+
+                }
+                $('#qudao1 tbody').html(str);
+            }
+            // alert('1');
+           
+        }
+     }); 
+
+    })
+       
+
+
+
+    
+</script>
+
+<script>
+
+    // $(".myform button[type='submit']").click(function(e){
+    //     e.preventDefault();
+    //     var sele = $('.xzqd option:selected').attr("toggle-data");
+    //     $(sele).siblings(".table").removeClass("show");
+    //     $(sele).addClass("show");
+    // })
+
+
+    laydate({
+        elem:"#qssj",
+        event:"click",
+        format:"YYYY-MM-DD",
+        istime:true,
+        isclear:false,
+        start:"2016-4-15",
+    });
+    laydate({
+        elem:"#jzsj",
+        event:"click",
+        format:"YYYY-MM-DD",
+        istime:true,
+        isclear:false,
+        start:"2016-4-24",
+    });
+    $(document).ready(function(){
+        setday()
+    })
+
+   $(function(){
+    var twidth=$('#qudao1').width();
+    // console.log(twidth)
+    $("#qudao1>thead").width(twidth);
+   })
+    
+
+
+</script>
+</html>

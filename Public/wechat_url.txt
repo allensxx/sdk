@@ -1,0 +1,1 @@
+http://120.92.133.152:8080/g04-admin/recharge/chuangyou?respCode=200&respMsg=%E4%BA%A4%E6%98%93%E5%AE%8C%E6%88%90&signMethod=md5&tradeType=01&tradeStatus=000&uid=1274&orderNumber=2016092157101525&orderAmount=1&cporderNumber=order1474434971603&extInfo=baecaaewfedsfafdsafdfda321AZa&payTime=1474435107&sign=a40f393e8b4b337c48ab84307df41345

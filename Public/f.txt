@@ -1,0 +1,1 @@
+SELECT `id`,`register`,`date` FROM `sp_counts` WHERE `date` = '2016-09-11' LIMIT 1  
